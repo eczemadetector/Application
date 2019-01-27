@@ -1,0 +1,83 @@
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+
+#instructions {
+    position: relative;
+    width: 720px;
+    margin: 3% auto auto;
+}
+
+#layout {
+    position: relative;
+    background: #FFFFFF;
+    width: 720px;
+    margin: 3% auto auto auto;
+    padding: 33px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 25px 0 rgba(0, 0, 0, 0.24); 
+}
+
+button {
+    font-family: "Ubuntu", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    width: 307px;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 20px 3px 7px 3px;
+}
+
+input {
+    display: none;
+}
+
+form {
+    display: inline-block;
+}
+
+.inverted {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+#overlay {
+    position: absolute;
+    top: 50px;
+    left: 80px;
+  }
+
+#snap {
+    background: rgb(137, 195, 243);
+}
+
+#snap:hover {
+    background: rgb(106, 163, 209);
+}
+
+#reset {
+    background: rgb(247, 117, 78);
+}
+
+#reset:hover {
+    background: rgb(196, 74, 37);
+}
+
+#submit {
+    background: #4CAF50;
+}
+
+#submit:hover {
+    background: #43A047;
+}
+
+#submit:disabled, #submit[disabled]{
+  background: #cccccc;
+}
+
+
+body {
+    background: rgb(183, 216, 164);
+    font-family: "Ubuntu", sans-serif;
+  }

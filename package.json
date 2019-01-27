@@ -1,0 +1,26 @@
+{
+  "name": "application",
+  "version": "1.0.0",
+  "description": "Application / Website (Server and client side) ",
+  "main": "server.js",
+  "scripts": {
+    "preinstall": "mkdir images",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eczemadetector/Application.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eczemadetector/Application/issues"
+  },
+  "homepage": "https://github.com/eczemadetector/Application#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "file-exists": "^5.0.1",
+    "sharp": "^0.21.3"
+  }
+}

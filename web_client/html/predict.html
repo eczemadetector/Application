@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Upload Image</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/utils.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+  
+<body>
+
+    <div id="instructions">
+        <h1>Take a picture of your hand</h1>
+        <p>Make sure to align your hand with the drawing in the box to ensure our prediction algorithm is as accurate as possible. </p>
+    </div>
+
+    <div id="layout">
+        <br>
+        <video id="video" class="inverted" width="640" height="480" autoplay></video>
+        <canvas id="canvas" class="inverted" width="640" height="480"></canvas>
+        <img src="images/overlay.png" id="overlay">
+        <br><br>
+        <form>
+            <input type="text" name="image" class="hidden" id="image">
+            <button id="submit" type="submit" formaction="/process" formmethod="post">Predict</button>
+        </form>  
+        <button id="snap">Take Picture</button>
+        <button id="reset">Reset</button>
+    </div>
+
+    <audio id="audio" src="/audio/shutter.mp3" ></audio>
+    <script src="js/predict.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+
+#instructions {
+    position: relative;
+    width: 50%;
+    margin: 5% auto 100px;
+    text-align: center;
+}
+
+button {
+    font-family: "Ubuntu", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    width: 50%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5% 0 0 0;
+}
+
+p {
+    font-weight: 500;
+    line-height: 1.5em;
+    text-align: justify;
+    font-size: 20px;
+    text-indent: 80px;
+    margin: 50px 60px;
+}
+
+input {
+    display: none;
+}
+
+form {
+    display: inline-block;
+}
+
+#retry {
+    background: #4CAF50;
+}
+
+#retry:hover {
+    background: #43A047;
+}
+
+
+
+body {
+    background: rgb(212, 181, 181);
+    font-family: "Ubuntu", sans-serif;
+  }
