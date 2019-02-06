@@ -4,7 +4,6 @@
   "description": "Application / Website (Server and client side) ",
   "main": "server.js",
   "scripts": {
-    "preinstall": "mkdir images",
     "start": "node ."
   },
   "repository": {
@@ -18,9 +17,13 @@
   },
   "homepage": "https://github.com/eczemadetector/Application#readme",
   "dependencies": {
+    "@tensorflow/tfjs-node": "^0.2.3",
+    "canvas": "^2.3.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
     "file-exists": "^5.0.1",
+    "get-pixels": "^3.3.2",
+    "png-js": "^0.1.1",
     "sharp": "^0.21.3"
   }
 }

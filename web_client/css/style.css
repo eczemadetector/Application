@@ -72,11 +72,6 @@ form {
     background: #43A047;
 }
 
-#submit:disabled, #submit[disabled]{
-  background: #cccccc;
-}
-
-
 body {
     background: rgb(183, 216, 164);
     font-family: "Ubuntu", sans-serif;

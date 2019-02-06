@@ -3,7 +3,9 @@ const sharp = require('sharp')
 const bodyParser = require('body-parser')
 const fileExists = require('file-exists')
 const cookieParser = require('cookie-parser')
-const spawn = require('child_process').spawn
+const tf = require('@tensorflow/tfjs-node')
+const getPixels = require("get-pixels")
+
 const fs = require('fs')
 const path = require('path')
 
@@ -18,19 +20,20 @@ app.use(bodyParser.json({ limit: '1mb' }))
 app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' }))
 app.use(cookieParser()); // for parsing cookies
 
-var images = []
+var model
+var images
+
+tf.loadModel('file://./Model/model.json').then(res => {
+    model = res
+})
 
 console.log('------------------------------------------')
 
-fs.readdir('images', (err, files) => { // Delete all previously saved images
-    if (err) throw err;
-  
-    for (const file of files) {
-        fs.unlink(path.join('images', file), err => {
-            if (err) throw err;
-        });
-    }
-});
+fs.readdir('images', (err, files) => {
+    if (err)  throw err
+
+    images = new Array(files.length + 1)
+  })
 
 app.get('/', (req, res) => {
     if (req.cookies.id) {
@@ -81,52 +84,42 @@ app.get('/predict', (req, res) => {
 
 app.post('/process', (req, res) => {
 
-    let image = req.body.image
+    let b64 = req.body.image
     let id = images.length;
 
-    if (image) {
+    if (b64) {
 
-        image = image.replace('data:image/png;base64,', '') // Delete useless text at the beginnning of the string
+        b64 = b64.replace('data:image/png;base64,', '') // Delete useless text at the beginnning of the string
 
         images.push('processing')
 
         res.cookie('id', id)
         res.sendFile(html_path + 'processing.html')
-        
-        sharp(Buffer.from(image, 'base64'))
+
+        let file = path.join(__dirname, 'images', 'image_' + id + '.png')
+
+        // Save file
+        sharp(Buffer.from(b64, 'base64'))
             .extract({ left: 80, top: 0, width: 480, height: 480 })
             .resize(128, 128)
-            .toFile('images/image_' + id + '.png', err => {
-                if (err) console.error(err)
-            });
+            .toFile(file, err => {
+                if (err) console.error("YEET!: " + err)
 
+                if (err)  console.log("Bad image path")
 
-            let random = parseInt(Math.random() * 10)
+                console.log("got pixels", pixels.shape.slice())
+                console.log(pixels)
 
-            if (random < 8) {
-                images[id] = 0
-
-            } else images[id] = 1
-
-
-/*
-
-        const script = spawn('python3', ['python/test.py'])
-
-        script.stdout.on('data', data => {
-
-            if (data == 1) { // Hand has eczema
-                images[id] = 1 
-
-            } else if (data == 0) { // Hand is normal
-                images[id] = 0
-                
-            } else {
-                console.error('Invalid output: ' + data)
-            }
-        });
-
-*/
+                image = tf.fromPixels(pixels)
+                console.log(image)
+                    
+                console.log('starting')
+                image = tf.reshape(image, [1, 128, 128, 3])
+                console.log('done')
+        
+                const data = model.predict(image)
+                console.log(data)
+            })
 
     } else res.sendStatus(400) // No image specified: bad request
     
@@ -163,5 +156,3 @@ app.get('*', (req, res) => {
 app.listen(8080, () => {
     console.log('listening on *:8080')
 })
-
-
